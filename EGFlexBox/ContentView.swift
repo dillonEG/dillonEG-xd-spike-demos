@@ -8,9 +8,29 @@
 import SwiftUI
 
 struct ContentView: View {
+    let amenities: [Amenity] = Mock.amenities()
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack {
+            ForEach(amenities) { item in
+                AmenityView(item)
+            }
+        }
+    }
+}
+
+struct AmenityView: View {
+    let amenity: Amenity
+    
+    init(_ amenity: Amenity) {
+        self.amenity = amenity
+    }
+    
+    var body: some View {
+        HStack {
+            Image(amenity.glyphName)
+            Text(amenity.label)
+        }
     }
 }
 
