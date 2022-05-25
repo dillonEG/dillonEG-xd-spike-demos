@@ -9,6 +9,16 @@ import SwiftUI
 
 struct NavigationToolbarView: View {
     
+    init() {
+        let appearance = UINavigationBarAppearance()
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.systemRed]
+        appearance.backgroundColor = .white
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().compactAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        UINavigationBar.appearance().tintColor = .blue
+    }
+    
     var body: some View {
         NavigationView {
             VStack {
