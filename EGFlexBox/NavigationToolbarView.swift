@@ -27,35 +27,40 @@ struct NavigationToolbarView: View {
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        print("Back button tapped")
-                    } label: {
-                        sfSymbol(name: "chevron.left")
-                    }
+                navigationToolbar
+            }
+        }
+    }
+    
+    var navigationToolbar: some ToolbarContent {
+        Group {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    print("Back button tapped")
+                } label: {
+                    sfSymbol(name: "chevron.left")
                 }
-                
-                ToolbarItem(placement: .principal) {
-                    VStack {
-                        Text("Custom Title")
-                            .font(.custom("Avenir-Roman", size: 14, relativeTo: .title))
-                            .bold()
-                        
-                        Text("Subtitle")
-                            .font(.custom("Avenir-Light", size: 11, relativeTo: .subheadline))
-                    }
+            }
+            
+            ToolbarItem(placement: .principal) {
+                VStack {
+                    Text("Custom Title")
+                        .font(.custom("Avenir-Roman", size: 14, relativeTo: .title))
+                        .bold()
+                    
+                    Text("Subtitle")
+                        .font(.custom("Avenir-Light", size: 11, relativeTo: .subheadline))
                 }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        favorite.toggle()
-                    } label: {
-                        sfSymbol(
-                            name: favorite ? "heart.fill" : "heart",
-                            color: favorite ? .pink : .black
-                        )
-                    }
+            }
+            
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    favorite.toggle()
+                } label: {
+                    sfSymbol(
+                        name: favorite ? "heart.fill" : "heart",
+                        color: favorite ? .pink : .black
+                    )
                 }
             }
         }
