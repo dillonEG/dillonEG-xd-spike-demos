@@ -16,6 +16,10 @@ struct HomeNavigationView: View {
                 NavigationLink(destination: NavigationToolbarView()) {
                     Text("Navigation toolbar")
                 }
+                
+                NavigationLink(destination: AmenitiesBlockView()) {
+                    Text("Amenities blocks")
+                }
             }
             .listStyle(.plain)
             .navigationBarTitle("Spike Demos", displayMode: .large)
