@@ -1,6 +1,6 @@
 //
-//  EGFlexBoxApp.swift
-//  EGFlexBox
+//  XDdemosApp.swift
+//  XDdemos
 //
 //  Created by Dillon on 5/24/22.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct EGFlexBoxApp: App {
+struct XDdemosApp: App {
     var body: some Scene {
         WindowGroup {
             HomeNavigationView()

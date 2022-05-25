@@ -1,6 +1,6 @@
 //
 //  Amenity.swift
-//  EGFlexBox
+//  XDdemos
 //
 //  Created by Dillon on 5/24/22.
 //

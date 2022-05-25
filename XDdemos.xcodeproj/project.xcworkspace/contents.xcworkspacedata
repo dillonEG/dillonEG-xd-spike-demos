@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:">
+      location = "self:/Users/dillon/EG_Repos/eg-flex-box/EGFlexBox/XDdemos.xcodeproj">
    </FileRef>
 </Workspace>
