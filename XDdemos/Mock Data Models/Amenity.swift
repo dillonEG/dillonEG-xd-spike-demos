@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Amenity: Identifiable {
+struct Amenity: Identifiable, Hashable {
     let id = UUID()
     let label: String
     let glyphName: String

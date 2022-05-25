@@ -57,9 +57,9 @@
 		51F98FB0283D6FAF00FA9B1E /* XDdemos */ = {
 			isa = PBXGroup;
 			children = (
+				51F98FC5283E959700FA9B1E /* Mock Data Models */,
 				51F98FC7283E963C00FA9B1E /* Blocks */,
 				51F98FC6283E95C700FA9B1E /* Custom Toolbars */,
-				51F98FC5283E959700FA9B1E /* Mock Data Models */,
 				51F98FB1283D6FAF00FA9B1E /* XDdemosApp.swift */,
 				51F98FB3283D6FAF00FA9B1E /* HomeNavigationView.swift */,
 				51F98FB5283D6FAF00FA9B1E /* Assets.xcassets */,
