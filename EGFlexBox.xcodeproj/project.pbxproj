@@ -12,6 +12,7 @@
 		51F98FB6283D6FAF00FA9B1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51F98FB5283D6FAF00FA9B1E /* Assets.xcassets */; };
 		51F98FB9283D6FAF00FA9B1E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51F98FB8283D6FAF00FA9B1E /* Preview Assets.xcassets */; };
 		51F98FC0283D87A100FA9B1E /* Amenity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F98FBF283D87A100FA9B1E /* Amenity.swift */; };
+		51F98FC2283D8BAF00FA9B1E /* NavigationToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F98FC1283D8BAF00FA9B1E /* NavigationToolbarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		51F98FB5283D6FAF00FA9B1E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		51F98FB8283D6FAF00FA9B1E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		51F98FBF283D87A100FA9B1E /* Amenity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Amenity.swift; sourceTree = "<group>"; };
+		51F98FC1283D8BAF00FA9B1E /* NavigationToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationToolbarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 				51F98FB5283D6FAF00FA9B1E /* Assets.xcassets */,
 				51F98FB7283D6FAF00FA9B1E /* Preview Content */,
 				51F98FBF283D87A100FA9B1E /* Amenity.swift */,
+				51F98FC1283D8BAF00FA9B1E /* NavigationToolbarView.swift */,
 			);
 			path = EGFlexBox;
 			sourceTree = "<group>";
@@ -143,6 +146,7 @@
 				51F98FB4283D6FAF00FA9B1E /* ContentView.swift in Sources */,
 				51F98FB2283D6FAF00FA9B1E /* EGFlexBoxApp.swift in Sources */,
 				51F98FC0283D87A100FA9B1E /* Amenity.swift in Sources */,
+				51F98FC2283D8BAF00FA9B1E /* NavigationToolbarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
