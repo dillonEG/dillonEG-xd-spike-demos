@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NavigationToolbarView: View {
+    @State private var favorite: Bool = false
     
     init() {
         let appearance = UINavigationBarAppearance()
@@ -27,6 +28,14 @@ struct NavigationToolbarView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        print("Back button tapped")
+                    } label: {
+                        sfSymbol(name: "chevron.left")
+                    }
+                }
+                
                 ToolbarItem(placement: .principal) {
                     VStack {
                         Text("Custom Title")
@@ -37,8 +46,25 @@ struct NavigationToolbarView: View {
                             .font(.custom("Avenir-Light", size: 11, relativeTo: .subheadline))
                     }
                 }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        favorite.toggle()
+                    } label: {
+                        sfSymbol(
+                            name: favorite ? "heart.fill" : "heart",
+                            color: favorite ? .pink : .black
+                        )
+                    }
+                }
             }
         }
+    }
+    
+    func sfSymbol(name: String, color: Color = .black) -> some View {
+        Image(systemName: name)
+            .symbolRenderingMode(.monochrome)
+            .foregroundColor(color)
     }
 }
 
