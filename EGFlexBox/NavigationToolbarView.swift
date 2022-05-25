@@ -43,14 +43,7 @@ struct NavigationToolbarView: View {
             }
             
             ToolbarItem(placement: .principal) {
-                VStack {
-                    Text("Custom Title")
-                        .font(.custom("Avenir-Roman", size: 14, relativeTo: .title))
-                        .bold()
-                    
-                    Text("Subtitle")
-                        .font(.custom("Avenir-Light", size: 11, relativeTo: .subheadline))
-                }
+                titleLabelView
             }
             
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -70,6 +63,17 @@ struct NavigationToolbarView: View {
         Image(systemName: name)
             .symbolRenderingMode(.monochrome)
             .foregroundColor(color)
+    }
+    
+    var titleLabelView: some View {
+        VStack {
+            Text("Custom Title")
+                .font(.custom("Avenir-Roman", size: 14, relativeTo: .title))
+                .bold()
+            
+            Text("Subtitle")
+                .font(.custom("Avenir-Light", size: 11, relativeTo: .subheadline))
+        }
     }
 }
 
