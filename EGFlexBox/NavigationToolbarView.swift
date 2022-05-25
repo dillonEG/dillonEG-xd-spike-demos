@@ -8,64 +8,53 @@
 import SwiftUI
 
 struct NavigationToolbarView: View {
-    @State private var favorite: Bool = false
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @State private var favorited: Bool = false
     
     init() {
         let appearance = UINavigationBarAppearance()
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.systemRed]
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
         appearance.backgroundColor = .white
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().compactAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        UINavigationBar.appearance().tintColor = .blue
     }
     
     var body: some View {
-        NavigationView {
-            VStack {
-                Color.blue
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                navigationToolbar
-            }
+        VStack {
+            Color.blue
+        }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            navigationToolbar
         }
     }
     
     var navigationToolbar: some ToolbarContent {
         Group {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button {
-                    print("Back button tapped")
-                } label: {
-                    sfSymbol(name: "chevron.left")
+                ToolbarButton(sfSymbolName: "chevron.left") {
+                    mode.wrappedValue.dismiss()
                 }
             }
             
             ToolbarItem(placement: .principal) {
-                titleLabelView
+                toolbarTitleLabel
             }
             
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    favorite.toggle()
-                } label: {
-                    sfSymbol(
-                        name: favorite ? "heart.fill" : "heart",
-                        color: favorite ? .pink : .black
-                    )
+                ToolbarButton(
+                    sfSymbolName: favorited ? "heart.fill" : "heart",
+                    color: favorited ? .pink : .black
+                ) {
+                    favorited.toggle()
                 }
             }
         }
     }
     
-    func sfSymbol(name: String, color: Color = .black) -> some View {
-        Image(systemName: name)
-            .symbolRenderingMode(.monochrome)
-            .foregroundColor(color)
-    }
-    
-    var titleLabelView: some View {
+    var toolbarTitleLabel: some View {
         VStack {
             Text("Custom Title")
                 .font(.custom("Avenir-Roman", size: 14, relativeTo: .title))
@@ -73,6 +62,22 @@ struct NavigationToolbarView: View {
             
             Text("Subtitle")
                 .font(.custom("Avenir-Light", size: 11, relativeTo: .subheadline))
+        }
+    }
+}
+
+struct ToolbarButton: View {
+    var sfSymbolName: String
+    var color: Color = .black
+    var action: () -> Void
+    
+    var body: some View {
+        Button {
+            action()
+        } label: {
+            Image(systemName: sfSymbolName)
+                .symbolRenderingMode(.monochrome)
+                .foregroundColor(color)
         }
     }
 }
