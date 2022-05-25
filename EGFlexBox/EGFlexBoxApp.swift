@@ -11,7 +11,7 @@ import SwiftUI
 struct EGFlexBoxApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeNavigationView()
         }
     }
 }
