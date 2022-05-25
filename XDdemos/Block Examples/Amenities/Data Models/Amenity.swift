@@ -13,8 +13,8 @@ struct Amenity: Identifiable, Hashable {
     let glyphName: String
 }
 
-struct Mock {
-    static func amenities() -> [Amenity] {
+extension Amenity {
+    static func mock() -> [Amenity] {
         [
             Amenity(label: "Washer & Dryer", glyphName: "snowflake"),
             Amenity(label: "Fireplace", glyphName: "fireplace"),

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		51D387A3283EBFE50056AD5B /* Text+Amenity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D387A2283EBFE50056AD5B /* Text+Amenity.swift */; };
+		51D387A5283EBFFF0056AD5B /* Color+Amenity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D387A4283EBFFF0056AD5B /* Color+Amenity.swift */; };
+		51D387A8283EC0590056AD5B /* AmenityItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D387A7283EC0590056AD5B /* AmenityItem.swift */; };
 		51F98FB2283D6FAF00FA9B1E /* XDdemosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F98FB1283D6FAF00FA9B1E /* XDdemosApp.swift */; };
 		51F98FB4283D6FAF00FA9B1E /* HomeNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F98FB3283D6FAF00FA9B1E /* HomeNavigationView.swift */; };
 		51F98FB6283D6FAF00FA9B1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51F98FB5283D6FAF00FA9B1E /* Assets.xcassets */; };
@@ -17,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		51D387A2283EBFE50056AD5B /* Text+Amenity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Amenity.swift"; sourceTree = "<group>"; };
+		51D387A4283EBFFF0056AD5B /* Color+Amenity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Amenity.swift"; sourceTree = "<group>"; };
+		51D387A7283EC0590056AD5B /* AmenityItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmenityItem.swift; sourceTree = "<group>"; };
 		51F98FAE283D6FAF00FA9B1E /* XDdemos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XDdemos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51F98FB1283D6FAF00FA9B1E /* XDdemosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XDdemosApp.swift; sourceTree = "<group>"; };
 		51F98FB3283D6FAF00FA9B1E /* HomeNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationView.swift; sourceTree = "<group>"; };
@@ -38,6 +44,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		51D3879F283EBF770056AD5B /* Amenities */ = {
+			isa = PBXGroup;
+			children = (
+				51D387A0283EBF870056AD5B /* Data Models */,
+				51D387A1283EBFA00056AD5B /* Helper Extensions */,
+				51D387A6283EC02F0056AD5B /* Subviews */,
+			);
+			path = Amenities;
+			sourceTree = "<group>";
+		};
+		51D387A0283EBF870056AD5B /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				51F98FBF283D87A100FA9B1E /* Amenity.swift */,
+			);
+			path = "Data Models";
+			sourceTree = "<group>";
+		};
+		51D387A1283EBFA00056AD5B /* Helper Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				51D387A2283EBFE50056AD5B /* Text+Amenity.swift */,
+				51D387A4283EBFFF0056AD5B /* Color+Amenity.swift */,
+			);
+			path = "Helper Extensions";
+			sourceTree = "<group>";
+		};
+		51D387A6283EC02F0056AD5B /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				51D387A7283EC0590056AD5B /* AmenityItem.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
 		51F98FA5283D6FAF00FA9B1E = {
 			isa = PBXGroup;
 			children = (
@@ -57,8 +98,7 @@
 		51F98FB0283D6FAF00FA9B1E /* XDdemos */ = {
 			isa = PBXGroup;
 			children = (
-				51F98FC5283E959700FA9B1E /* Mock Data Models */,
-				51F98FC7283E963C00FA9B1E /* Blocks */,
+				51F98FC7283E963C00FA9B1E /* Block Examples */,
 				51F98FC6283E95C700FA9B1E /* Custom Toolbars */,
 				51F98FB1283D6FAF00FA9B1E /* XDdemosApp.swift */,
 				51F98FB3283D6FAF00FA9B1E /* HomeNavigationView.swift */,
@@ -76,14 +116,6 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		51F98FC5283E959700FA9B1E /* Mock Data Models */ = {
-			isa = PBXGroup;
-			children = (
-				51F98FBF283D87A100FA9B1E /* Amenity.swift */,
-			);
-			path = "Mock Data Models";
-			sourceTree = "<group>";
-		};
 		51F98FC6283E95C700FA9B1E /* Custom Toolbars */ = {
 			isa = PBXGroup;
 			children = (
@@ -92,12 +124,13 @@
 			path = "Custom Toolbars";
 			sourceTree = "<group>";
 		};
-		51F98FC7283E963C00FA9B1E /* Blocks */ = {
+		51F98FC7283E963C00FA9B1E /* Block Examples */ = {
 			isa = PBXGroup;
 			children = (
+				51D3879F283EBF770056AD5B /* Amenities */,
 				51F98FC3283E6E9500FA9B1E /* AmenitiesBlockView.swift */,
 			);
-			path = Blocks;
+			path = "Block Examples";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,9 +203,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51D387A3283EBFE50056AD5B /* Text+Amenity.swift in Sources */,
 				51F98FB4283D6FAF00FA9B1E /* HomeNavigationView.swift in Sources */,
 				51F98FB2283D6FAF00FA9B1E /* XDdemosApp.swift in Sources */,
 				51F98FC4283E6E9500FA9B1E /* AmenitiesBlockView.swift in Sources */,
+				51D387A8283EC0590056AD5B /* AmenityItem.swift in Sources */,
+				51D387A5283EBFFF0056AD5B /* Color+Amenity.swift in Sources */,
 				51F98FC0283D87A100FA9B1E /* Amenity.swift in Sources */,
 				51F98FC2283D8BAF00FA9B1E /* NavigationToolbarView.swift in Sources */,
 			);
