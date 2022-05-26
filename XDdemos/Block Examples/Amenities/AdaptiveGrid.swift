@@ -8,21 +8,39 @@
 import SwiftUI
 
 struct AdaptiveGrid<Content>: View where Content: View {
-    let flexDirection: FlexDirection
-    let minItemSize: CGFloat
+    typealias ItemSize = (min: CGFloat, max: CGFloat)
+    let direction: FlexDirection
+    let size: ItemSize
     let gridContent: Content
     
-    init(flexDirection: FlexDirection, minItemSize: CGFloat, @ViewBuilder content: () -> Content) {
-        self.flexDirection = flexDirection
-        self.minItemSize = minItemSize
+    init(
+        flexDirection: FlexDirection,
+        itemSize: ItemSize = (190, .infinity),
+        @ViewBuilder content: () -> Content
+    ) {
+        self.direction = flexDirection
+        self.size = itemSize
         self.gridContent = content()
     }
     
     var body: some View {
-        let cell = GridItem(.adaptive(minimum: minItemSize))
-
-        LazyVGrid(columns: [cell], alignment: .leading) {
-            gridContent
+        let gridItems = [GridItem(
+            .adaptive(minimum: size.min, maximum: size.max),
+            alignment: .leading
+        )]
+        
+        switch direction {
+            case .row, .rowReverse:
+                // alignment of grid within parent view
+                LazyHGrid(rows: gridItems) {
+                    gridContent
+                }
+                
+            case .column, .columnReverse:
+                // alignment of grid within parent view
+                LazyVGrid(columns: gridItems) {
+                    gridContent
+                }
         }
     }
 }
@@ -39,7 +57,7 @@ struct AdaptiveGrid_Previews: PreviewProvider {
     static var previews: some View {
         let amenities = Amenity.mock()
         
-        AdaptiveGrid(flexDirection: .column, minItemSize: 190, content: {
+        AdaptiveGrid(flexDirection: .column, itemSize: (190, .infinity), content: {
             ForEach(amenities) { amenity in
                 AmenityItem(amenity)
             }
