@@ -7,25 +7,32 @@
 
 import SwiftUI
 
-struct AmenitiesGrid: View {
-    let amenities: [Amenity] = Amenity.mock()
-    let minWidth: CGFloat
-
+struct AdaptiveGrid<Content>: View where Content: View {
+    let minItemSize: CGFloat
+    let gridContent: Content
+    
+    init(minItemSize: CGFloat, @ViewBuilder content: () -> Content) {
+        self.minItemSize = minItemSize
+        self.gridContent = content()
+    }
+    
     var body: some View {
-        let cell = GridItem(.adaptive(minimum: minWidth))
+        let cell = GridItem(.adaptive(minimum: minItemSize))
 
         LazyVGrid(columns: [cell], alignment: .leading) {
-            ForEach(amenities, id: \.self) { amenity in
-                AmenityItem(amenity)
-            }
+            gridContent
         }
     }
 }
 
 struct AdaptiveGrid_Previews: PreviewProvider {
     static var previews: some View {
-        AmenitiesGrid(minWidth: 190)
-            .previewDevice("iPhone 8 Plus")
-            .previewInterfaceOrientation(.landscapeLeft)
+        let amenities = Amenity.mock()
+        
+        AdaptiveGrid(minItemSize: 190, content: {
+            ForEach(amenities) { amenity in
+                AmenityItem(amenity)
+            }
+        })
     }
 }
