@@ -10,12 +10,12 @@ import SwiftUI
 struct AdaptiveGrid<Content>: View where Content: View {
     typealias ItemSize = (min: CGFloat, max: CGFloat)
     let direction: FlexDirection
-    let size: ItemSize
+    let size: FlexSize
     let gridContent: Content
     
     init(
         flexDirection: FlexDirection,
-        itemSize: ItemSize = (190, .infinity),
+        itemSize: FlexSize = .defaultColumn,
         @ViewBuilder content: () -> Content
     ) {
         self.direction = flexDirection
@@ -53,14 +53,25 @@ enum FlexDirection {
     case columnReverse // top <-- bottom
 }
 
+struct FlexSize {
+    let min: CGFloat
+    let max: CGFloat
+    
+    static let defaultRow = FlexSize(min: 40, max: .infinity)
+    static let defaultColumn = FlexSize(min: 190, max: .infinity)
+}
+
+
 struct AdaptiveGrid_Previews: PreviewProvider {
     static var previews: some View {
         let amenities = Amenity.mock()
         
-        AdaptiveGrid(flexDirection: .column, itemSize: (190, .infinity), content: {
+        AdaptiveGrid(
             ForEach(amenities) { amenity in
-                AmenityItem(amenity)
-            }
-        })
+            flexDirection: .column,
+            itemSize: .defaultColumn
+        ) { amenity in
+            AmenityItem(amenity)
+        }
     }
 }
