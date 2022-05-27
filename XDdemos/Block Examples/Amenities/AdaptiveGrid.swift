@@ -35,7 +35,7 @@ struct AdaptiveGrid<T, Content>: View where T: Hashable, Content: View {
             case .row, .rowReverse:
                 // alignment of entire grid within parent view
                 LazyHGrid(rows: gridItems, alignment: .center) {
-                    FlexContent(data) { item in
+                    FlexContent(data, direction) { item in
                         gridContent(item)
                     }
                 }
@@ -43,7 +43,7 @@ struct AdaptiveGrid<T, Content>: View where T: Hashable, Content: View {
             case .column, .columnReverse:
                 // alignment of entire grid within parent view
                 LazyVGrid(columns: gridItems, alignment: .leading) {
-                    FlexContent(data) { item in
+                    FlexContent(data, direction) { item in
                         gridContent(item)
                     }
                 }
@@ -55,10 +55,12 @@ struct AdaptiveGrid<T, Content>: View where T: Hashable, Content: View {
 // MARK: Flex Content
 struct FlexContent<T, Content>: View where T: Hashable, Content: View {
     let data: [T]
+    let direction: FlexDirection
     let content: (T) -> Content
     
-    init(_ data: [T], @ViewBuilder content: @escaping (T) -> Content) {
-        self.data = data
+    init(_ data: [T], _ direction: FlexDirection, @ViewBuilder content: @escaping (T) -> Content) {
+        self.data = FlexContent.isReverse(direction) ? data.reversed() : data
+        self.direction = direction
         self.content = content
     }
     
@@ -66,6 +68,10 @@ struct FlexContent<T, Content>: View where T: Hashable, Content: View {
         ForEach(data, id: \.self) { item in
             content(item)
         }
+    }
+    
+    static func isReverse(_ direction: FlexDirection) -> Bool {
+        return direction == .rowReverse || direction == .columnReverse
     }
 }
 
