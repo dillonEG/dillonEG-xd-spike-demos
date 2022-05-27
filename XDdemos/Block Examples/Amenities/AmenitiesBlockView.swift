@@ -10,12 +10,14 @@ import SwiftUI
 struct AmenitiesBlockView: View {
     let amenities: [Amenity] = Amenity.mock()
     
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             Text("Amenities")
                 .amenityTextLabel(.title)
             
-            ForEach(amenities, id: \.self) { amenity in
+            
+            AdaptiveGrid(amenities, flexDirection: .column, itemSize: .minimum(190)) { amenity in
                 AmenityItem(amenity)
             }
             
