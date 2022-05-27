@@ -7,20 +7,22 @@
 
 import SwiftUI
 
-struct AdaptiveGrid<Content>: View where Content: View {
-    typealias ItemSize = (min: CGFloat, max: CGFloat)
+struct AdaptiveGrid<T, Content>: View where T: Hashable, Content: View {
+    let data: [T]
     let direction: FlexDirection
-    let size: FlexSize
-    let gridContent: Content
+    let size: FlexItemSize
+    let gridContent: (T) -> Content
     
     init(
+        _ data: [T],
         flexDirection: FlexDirection,
-        itemSize: FlexSize = .defaultColumn,
-        @ViewBuilder content: () -> Content
+        itemSize: FlexItemSize = .defaultColumn,
+        @ViewBuilder content: @escaping (T) -> Content
     ) {
+        self.data = data
         self.direction = flexDirection
         self.size = itemSize
-        self.gridContent = content()
+        self.gridContent = content
     }
     
     var body: some View {
@@ -31,20 +33,44 @@ struct AdaptiveGrid<Content>: View where Content: View {
         
         switch direction {
             case .row, .rowReverse:
-                // alignment of grid within parent view
-                LazyHGrid(rows: gridItems) {
-                    gridContent
+                // alignment of entire grid within parent view
+                LazyHGrid(rows: gridItems, alignment: .center) {
+                    FlexContent(data) { item in
+                        gridContent(item)
+                    }
                 }
                 
             case .column, .columnReverse:
-                // alignment of grid within parent view
-                LazyVGrid(columns: gridItems) {
-                    gridContent
+                // alignment of entire grid within parent view
+                LazyVGrid(columns: gridItems, alignment: .leading) {
+                    FlexContent(data) { item in
+                        gridContent(item)
+                    }
                 }
         }
     }
 }
 
+
+// MARK: Flex Content
+struct FlexContent<T, Content>: View where T: Hashable, Content: View {
+    let data: [T]
+    let content: (T) -> Content
+    
+    init(_ data: [T], @ViewBuilder content: @escaping (T) -> Content) {
+        self.data = data
+        self.content = content
+    }
+    
+    var body: some View {
+        ForEach(data, id: \.self) { item in
+            content(item)
+        }
+    }
+}
+
+
+// MARK: - Helper Types
 /// Based on ltr language (opposite for rtl?)
 enum FlexDirection {
     case row // left --> right (default)
@@ -53,12 +79,16 @@ enum FlexDirection {
     case columnReverse // top <-- bottom
 }
 
-struct FlexSize {
+struct FlexItemSize {
     let min: CGFloat
     let max: CGFloat
     
-    static let defaultRow = FlexSize(min: 40, max: .infinity)
-    static let defaultColumn = FlexSize(min: 190, max: .infinity)
+    static let defaultRow = FlexItemSize(min: 40, max: .infinity)
+    static let defaultColumn = FlexItemSize(min: 192, max: .infinity)
+    
+    static func minimum(_ minSize: CGFloat) -> FlexItemSize {
+        return FlexItemSize(min: minSize, max: .infinity)
+    }
 }
 
 
@@ -67,7 +97,7 @@ struct AdaptiveGrid_Previews: PreviewProvider {
         let amenities = Amenity.mock()
         
         AdaptiveGrid(
-            ForEach(amenities) { amenity in
+            amenities,
             flexDirection: .column,
             itemSize: .defaultColumn
         ) { amenity in
