@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5154CFDE28457A5300F57987 /* FlexBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5154CFDD28457A5300F57987 /* FlexBox.swift */; };
 		51D387A3283EBFE50056AD5B /* Text+Amenity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D387A2283EBFE50056AD5B /* Text+Amenity.swift */; };
 		51D387A5283EBFFF0056AD5B /* Color+Amenity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D387A4283EBFFF0056AD5B /* Color+Amenity.swift */; };
 		51D387A8283EC0590056AD5B /* AmenityItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D387A7283EC0590056AD5B /* AmenityItem.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5154CFDD28457A5300F57987 /* FlexBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlexBox.swift; sourceTree = "<group>"; };
 		51D387A2283EBFE50056AD5B /* Text+Amenity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text+Amenity.swift"; sourceTree = "<group>"; };
 		51D387A4283EBFFF0056AD5B /* Color+Amenity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Amenity.swift"; sourceTree = "<group>"; };
 		51D387A7283EC0590056AD5B /* AmenityItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmenityItem.swift; sourceTree = "<group>"; };
@@ -49,6 +51,7 @@
 		5154CFDA284579AA00F57987 /* View Containers */ = {
 			isa = PBXGroup;
 			children = (
+				5154CFDC28457A4500F57987 /* Flex Box */,
 				5154CFDB284579CC00F57987 /* Grids */,
 			);
 			path = "View Containers";
@@ -61,6 +64,14 @@
 				51D387A9283EDC1E0056AD5B /* AdaptiveGrid.swift */,
 			);
 			path = Grids;
+			sourceTree = "<group>";
+		};
+		5154CFDC28457A4500F57987 /* Flex Box */ = {
+			isa = PBXGroup;
+			children = (
+				5154CFDD28457A5300F57987 /* FlexBox.swift */,
+			);
+			path = "Flex Box";
 			sourceTree = "<group>";
 		};
 		51D3879F283EBF770056AD5B /* Amenities */ = {
@@ -224,6 +235,7 @@
 			files = (
 				51D387AA283EDC1E0056AD5B /* AdaptiveGrid.swift in Sources */,
 				51D387A3283EBFE50056AD5B /* Text+Amenity.swift in Sources */,
+				5154CFDE28457A5300F57987 /* FlexBox.swift in Sources */,
 				51F98FB4283D6FAF00FA9B1E /* HomeNavigationView.swift in Sources */,
 				51F98FB2283D6FAF00FA9B1E /* XDdemosApp.swift in Sources */,
 				51F98FC4283E6E9500FA9B1E /* AmenitiesAdaptiveGrid.swift in Sources */,
