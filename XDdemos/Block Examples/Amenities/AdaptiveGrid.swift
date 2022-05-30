@@ -10,13 +10,13 @@ import SwiftUI
 struct AdaptiveGrid<T, Content>: View where T: Hashable, Content: View {
     let data: [T]
     let direction: FlexDirection
-    let size: FlexItemSize
+    let size: AdaptiveItemSize
     let gridContent: (T) -> Content
     
     init(
         _ data: [T],
         flexDirection: FlexDirection,
-        itemSize: FlexItemSize = .defaultColumn,
+        itemSize: AdaptiveItemSize = .defaultColumn,
         @ViewBuilder content: @escaping (T) -> Content
     ) {
         self.data = data
@@ -35,7 +35,7 @@ struct AdaptiveGrid<T, Content>: View where T: Hashable, Content: View {
             case .row, .rowReverse:
                 // alignment of entire grid within parent view
                 LazyHGrid(rows: gridItems, alignment: .center) {
-                    FlexContent(data, direction) { item in
+                    AdaptiveContent(data, direction) { item in
                         gridContent(item)
                     }
                 }
@@ -43,7 +43,7 @@ struct AdaptiveGrid<T, Content>: View where T: Hashable, Content: View {
             case .column, .columnReverse:
                 // alignment of entire grid within parent view
                 LazyVGrid(columns: gridItems, alignment: .leading) {
-                    FlexContent(data, direction) { item in
+                    AdaptiveContent(data, direction) { item in
                         gridContent(item)
                     }
                 }
@@ -51,15 +51,14 @@ struct AdaptiveGrid<T, Content>: View where T: Hashable, Content: View {
     }
 }
 
-
-// MARK: Flex Content
-struct FlexContent<T, Content>: View where T: Hashable, Content: View {
+// MARK: Adaptive Content
+struct AdaptiveContent<T, Content>: View where T: Hashable, Content: View {
     let data: [T]
     let direction: FlexDirection
     let content: (T) -> Content
     
     init(_ data: [T], _ direction: FlexDirection, @ViewBuilder content: @escaping (T) -> Content) {
-        self.data = FlexContent.isReverse(direction) ? data.reversed() : data
+        self.data = AdaptiveContent.isReverse(direction) ? data.reversed() : data
         self.direction = direction
         self.content = content
     }
@@ -75,32 +74,30 @@ struct FlexContent<T, Content>: View where T: Hashable, Content: View {
     }
 }
 
-
 // MARK: - Helper Types
-/// Based on ltr language (opposite for rtl?)
 enum FlexDirection {
-    case row // left --> right (default)
-    case rowReverse // left <-- right
+    case row // leading --> trailing (CSS default)
+    case rowReverse // trailing <-- leading
     case column // top --> bottom
     case columnReverse // top <-- bottom
 }
 
-struct FlexItemSize {
+struct AdaptiveItemSize {
     let min: CGFloat
     let max: CGFloat
     
-    static let defaultRow = FlexItemSize(min: 40, max: .infinity)
-    static let defaultColumn = FlexItemSize(min: 192, max: .infinity)
+    static let defaultRow = AdaptiveItemSize(min: 40, max: .infinity)
+    static let defaultColumn = AdaptiveItemSize(min: 192, max: .infinity)
     
-    static func minimum(_ minSize: CGFloat) -> FlexItemSize {
-        return FlexItemSize(min: minSize, max: .infinity)
+    static func minimum(_ minSize: CGFloat) -> AdaptiveItemSize {
+        return AdaptiveItemSize(min: minSize, max: .infinity)
     }
 }
 
 
 struct AdaptiveGrid_Previews: PreviewProvider {
     static var previews: some View {
-        let amenities = Amenity.mock()
+        let amenities: [Amenity] = Amenity.mock()
         
         AdaptiveGrid(
             amenities,
