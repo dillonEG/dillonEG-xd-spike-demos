@@ -17,7 +17,7 @@
 		51F98FB9283D6FAF00FA9B1E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51F98FB8283D6FAF00FA9B1E /* Preview Assets.xcassets */; };
 		51F98FC0283D87A100FA9B1E /* Amenity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F98FBF283D87A100FA9B1E /* Amenity.swift */; };
 		51F98FC2283D8BAF00FA9B1E /* NavigationToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F98FC1283D8BAF00FA9B1E /* NavigationToolbarView.swift */; };
-		51F98FC4283E6E9500FA9B1E /* AmenitiesBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F98FC3283E6E9500FA9B1E /* AmenitiesBlockView.swift */; };
+		51F98FC4283E6E9500FA9B1E /* AmenitiesAdaptiveGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F98FC3283E6E9500FA9B1E /* AmenitiesAdaptiveGrid.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,7 +32,7 @@
 		51F98FB8283D6FAF00FA9B1E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		51F98FBF283D87A100FA9B1E /* Amenity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Amenity.swift; sourceTree = "<group>"; };
 		51F98FC1283D8BAF00FA9B1E /* NavigationToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationToolbarView.swift; sourceTree = "<group>"; };
-		51F98FC3283E6E9500FA9B1E /* AmenitiesBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmenitiesBlockView.swift; sourceTree = "<group>"; };
+		51F98FC3283E6E9500FA9B1E /* AmenitiesAdaptiveGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmenitiesAdaptiveGrid.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +52,7 @@
 				51D387A0283EBF870056AD5B /* Data Models */,
 				51D387A1283EBFA00056AD5B /* Helper Extensions */,
 				51D387A6283EC02F0056AD5B /* Subviews */,
-				51F98FC3283E6E9500FA9B1E /* AmenitiesBlockView.swift */,
+				51F98FC3283E6E9500FA9B1E /* AmenitiesAdaptiveGrid.swift */,
 				51D387A9283EDC1E0056AD5B /* AdaptiveGrid.swift */,
 			);
 			path = Amenities;
@@ -210,7 +210,7 @@
 				51D387A3283EBFE50056AD5B /* Text+Amenity.swift in Sources */,
 				51F98FB4283D6FAF00FA9B1E /* HomeNavigationView.swift in Sources */,
 				51F98FB2283D6FAF00FA9B1E /* XDdemosApp.swift in Sources */,
-				51F98FC4283E6E9500FA9B1E /* AmenitiesBlockView.swift in Sources */,
+				51F98FC4283E6E9500FA9B1E /* AmenitiesAdaptiveGrid.swift in Sources */,
 				51D387A8283EC0590056AD5B /* AmenityItem.swift in Sources */,
 				51D387A5283EBFFF0056AD5B /* Color+Amenity.swift in Sources */,
 				51F98FC0283D87A100FA9B1E /* Amenity.swift in Sources */,

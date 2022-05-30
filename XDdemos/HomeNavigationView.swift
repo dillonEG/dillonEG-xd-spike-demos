@@ -17,8 +17,8 @@ struct HomeNavigationView: View {
                     Text("Navigation toolbar")
                 }
                 
-                NavigationLink(destination: AmenitiesBlockView()) {
-                    Text("Amenities blocks")
+                NavigationLink(destination: AmenitiesAdaptiveGrid()) {
+                    Text("Amenities grid")
                 }
             }
             .listStyle(.plain)
