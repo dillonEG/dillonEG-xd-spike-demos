@@ -17,18 +17,27 @@ struct SizePreferences<Item: Hashable>: PreferenceKey {
 }
 
 struct FlexBox<T: Hashable, Content>: View where Content: View {
+    @State private var preferences: [T: CGRect] = [:]
     let data: [T]
+    let direction: FlexDirection
     let content: (T) -> Content
     
-    init(_ data: [T], @ViewBuilder content: @escaping (T) -> Content) {
+    init(
+        _ data: [T],
+        flexDirection: FlexDirection = .row,
+        @ViewBuilder content: @escaping (T) -> Content
+    ) {
         self.data = data
+        self.direction = flexDirection
         self.content = content
     }
     
     var body: some View {
-        VStack {
-            ForEach(data, id: \.self) { item in
-                content(item)
+        GeometryReader { geo in
+            ZStack(alignment: .topLeading) {
+                ForEach(data, id: \.self) { item in
+                    content(item)
+                }
             }
         }
     }
