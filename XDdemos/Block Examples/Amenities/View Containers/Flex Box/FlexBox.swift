@@ -57,9 +57,24 @@ struct FlexBox<T: Hashable, Content>: View where Content: View {
             }
         }
     }
+}
+
+
+// MARK: - FlexBox Size Preferences Layouts
+extension FlexBox {
+    typealias SizeValue = SizePreferences<T>.Value
     
+    func sizePreferenceHandler(_ sizes: SizeValue, proxy: GeometryProxy) {
+        switch direction {
+            case .row, .rowReverse:
+                flexRowSizeHandler(sizes, proxy: proxy)
+                
+            case .column, .columnReverse:
+                flexColumnSizeHandler(sizes, proxy: proxy)
+        }
+    }
     
-    func sizePreferenceHandler(_ sizes: SizePreferences<T>.Value, proxy: GeometryProxy) {
+    func flexRowSizeHandler(_ sizes: SizeValue, proxy: GeometryProxy) {
         var newPrefs: [T: CGRect] = [:]
         var bounds: [CGRect] = []
         
@@ -84,6 +99,10 @@ struct FlexBox<T: Hashable, Content>: View where Content: View {
             newPrefs[item] = rect
         }
         self.preferences = newPrefs
+    }
+    
+    func flexColumnSizeHandler(_ sizes: SizeValue, proxy: GeometryProxy) {
+        // handle size preferences for flex column layouts
     }
 }
 
