@@ -39,6 +39,32 @@ struct FlexBox<T: Hashable, Content>: View where Content: View {
                     content(item)
                 }
             }
+            .onPreferenceChange(SizePreferences<T>.self) { sizes in
+                var newPrefs: [T: CGRect] = [:]
+                var bounds: [CGRect] = []
+
+                for item in data {
+                    let size = sizes[item, default: .zero]
+                    let rect: CGRect
+
+                    if let lastBounds = bounds.last {
+                        if lastBounds.maxX + size.width > geo.size.width {
+                            let origin = CGPoint(x: 0, y: lastBounds.maxY)
+                            rect = CGRect(origin: origin, size: size)
+
+                        } else {
+                            let origin = CGPoint(x: lastBounds.maxX, y: lastBounds.minY)
+                            rect = CGRect(origin: origin, size: size)
+                        }
+
+                    } else {
+                        rect = CGRect(origin: .zero, size: size)
+                    }
+                    bounds.append(rect)
+                    newPrefs[item] = rect
+                }
+                self.preferences = newPrefs
+            }
         }
     }
 }
