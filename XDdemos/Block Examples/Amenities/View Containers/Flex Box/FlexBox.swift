@@ -37,6 +37,19 @@ struct FlexBox<T: Hashable, Content>: View where Content: View {
             ZStack(alignment: .topLeading) {
                 ForEach(data, id: \.self) { item in
                     content(item)
+                        .padding(8) // padding around inner content to edge of cell
+                        .alignmentGuide(.leading) { _ in
+                            -preferences[item, default: .zero].origin.x
+                        }
+                        .alignmentGuide(.top) { _ in
+                            -preferences[item, default: .zero].origin.y
+                        }
+                        .anchorPreference(
+                            key: SizePreferences<T>.self,
+                            value: .bounds
+                        ) {
+                            [item: geo[$0].size]
+                        }
                 }
             }
             .onPreferenceChange(SizePreferences<T>.self) { sizes in
