@@ -74,26 +74,6 @@ struct AdaptiveContent<T, Content>: View where T: Hashable, Content: View {
     }
 }
 
-// MARK: - Helper Types
-enum FlexDirection {
-    case row // leading --> trailing (CSS default)
-    case rowReverse // trailing <-- leading
-    case column // top --> bottom
-    case columnReverse // top <-- bottom
-}
-
-struct AdaptiveItemSize {
-    let min: CGFloat
-    let max: CGFloat
-    
-    static let defaultRow = AdaptiveItemSize(min: 40, max: .infinity)
-    static let defaultColumn = AdaptiveItemSize(min: 192, max: .infinity)
-    
-    static func minimum(_ minSize: CGFloat) -> AdaptiveItemSize {
-        return AdaptiveItemSize(min: minSize, max: .infinity)
-    }
-}
-
 
 struct AdaptiveGrid_Previews: PreviewProvider {
     static var previews: some View {
