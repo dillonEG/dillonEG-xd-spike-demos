@@ -62,6 +62,7 @@
 		5154CFDB284579CC00F57987 /* Grids */ = {
 			isa = PBXGroup;
 			children = (
+				51D387A6283EC02F0056AD5B /* Subviews */,
 				51F98FC3283E6E9500FA9B1E /* AmenitiesAdaptiveGrid.swift */,
 				51D387A9283EDC1E0056AD5B /* AdaptiveGrid.swift */,
 			);
@@ -82,8 +83,7 @@
 			children = (
 				5154CFDA284579AA00F57987 /* View Containers */,
 				51D387A0283EBF870056AD5B /* Data Models */,
-				51D387A1283EBFA00056AD5B /* Helper Extensions */,
-				51D387A6283EC02F0056AD5B /* Subviews */,
+				51D387A1283EBFA00056AD5B /* Helpers & Extensions */,
 			);
 			path = Amenities;
 			sourceTree = "<group>";
@@ -96,13 +96,13 @@
 			path = "Data Models";
 			sourceTree = "<group>";
 		};
-		51D387A1283EBFA00056AD5B /* Helper Extensions */ = {
+		51D387A1283EBFA00056AD5B /* Helpers & Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				51D387A2283EBFE50056AD5B /* Text+Amenity.swift */,
 				51D387A4283EBFFF0056AD5B /* Color+Amenity.swift */,
 			);
-			path = "Helper Extensions";
+			path = "Helpers & Extensions";
 			sourceTree = "<group>";
 		};
 		51D387A6283EC02F0056AD5B /* Subviews */ = {
