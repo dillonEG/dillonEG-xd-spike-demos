@@ -17,7 +17,11 @@ struct SizePreferences<Item: Hashable>: PreferenceKey {
 }
 
 struct FlexBox<T: Hashable, Content>: View where Content: View {
+    typealias FlexSizes = SizePreferences<T>
+    
     @State private var preferences: [T: CGRect] = [:]
+    @State private var didFinishLayout = false
+    
     let data: [T]
     let direction: FlexDirection
     let content: (T) -> Content
@@ -34,27 +38,33 @@ struct FlexBox<T: Hashable, Content>: View where Content: View {
     
     var body: some View {
         GeometryReader { geo in
-            ZStack(alignment: .topLeading) {
-                ForEach(data, id: \.self) { item in
-                    content(item)
-                        .padding(8) // padding around inner content to edge of cell
-                        .alignmentGuide(.leading) { _ in
-                            -preferences[item, default: .zero].origin.x
-                        }
-                        .alignmentGuide(.top) { _ in
-                            -preferences[item, default: .zero].origin.y
-                        }
-                        .anchorPreference(
-                            key: SizePreferences<T>.self,
-                            value: .bounds
-                        ) {
-                            [item: geo[$0].size]
-                        }
+            ScrollView(.horizontal) {
+                ZStack(alignment: .topLeading) {
+                    ForEach(data, id: \.self) { item in
+                        content(item)
+                            .alignmentGuide(.leading) { _ in
+                                -preferences[item, default: .zero].origin.x
+                            }
+                            .alignmentGuide(.top) { _ in
+                                -preferences[item, default: .zero].origin.y
+                            }
+                            .anchorPreference(
+                                key: FlexSizes.self,
+                                value: .bounds
+                            ) {
+                                [item: geo[$0].size]
+                            }
+                    }
+                }
+                .onPreferenceChange(FlexSizes.self) { sizes in
+                    if !didFinishLayout {
+                        defer { self.didFinishLayout = true }
+                        print("Size change")
+                        sizePreferenceHandler(sizes, proxy: geo)
+                    }
                 }
             }
-            .onPreferenceChange(SizePreferences<T>.self) { sizes in
-                sizePreferenceHandler(sizes, proxy: geo)
-            }
+            
         }
     }
 }
@@ -62,9 +72,7 @@ struct FlexBox<T: Hashable, Content>: View where Content: View {
 
 // MARK: - FlexBox Size Preferences Layouts
 extension FlexBox {
-    typealias SizeValue = SizePreferences<T>.Value
-    
-    func sizePreferenceHandler(_ sizes: SizeValue, proxy: GeometryProxy) {
+    func sizePreferenceHandler(_ sizes: FlexSizes.Value, proxy: GeometryProxy) {
         switch direction {
             case .row, .rowReverse:
                 flexRowSizeHandler(sizes, proxy: proxy)
@@ -74,7 +82,7 @@ extension FlexBox {
         }
     }
     
-    func flexRowSizeHandler(_ sizes: SizeValue, proxy: GeometryProxy) {
+    func flexRowSizeHandler(_ sizes: FlexSizes.Value, proxy: GeometryProxy) {
         var newPrefs: [T: CGRect] = [:]
         var bounds: [CGRect] = []
         
@@ -101,20 +109,52 @@ extension FlexBox {
         self.preferences = newPrefs
     }
     
-    func flexColumnSizeHandler(_ sizes: SizeValue, proxy: GeometryProxy) {
-        // handle size preferences for flex column layouts
-    }
-}
-
-
-struct FlexBox_Previews: PreviewProvider {
-    static var previews: some View {
-        let amenities: [Amenity] = Amenity.mock()
+    func flexColumnSizeHandler(_ sizes: FlexSizes.Value, proxy: GeometryProxy) {
+        var newPrefs: [T: CGRect] = [:]
+        var bounds: [CGRect] = []
         
-        FlexBox(amenities) { item in
-            AmenityItem(item)
-                .fixedSize()
-                .background(.orange)
+        var totalCols = 0
+        var leftColCount = 0
+        var currColCount = 0
+        
+        for (index, item) in data.enumerated() {
+            let size = sizes[item, default: .zero]
+            let rect: CGRect
+            
+            if let lastBounds = bounds.last {
+                var origin = CGPoint.zero
+                
+                if lastBounds.maxY + size.height > proxy.size.height {
+                    leftColCount = currColCount
+                    currColCount = 0
+                    totalCols += 1
+                    // origin = CGPoint(x: bounds[index - leftColCount - 1].maxX, y: .zero)
+                    origin.x = bounds[index - leftColCount].maxX
+                    
+                } else {
+                    
+                    if totalCols == 0 {
+                        origin.y = lastBounds.maxY
+                    } else {
+                        let leftI = index - leftColCount
+                        let leftNeighbor = bounds[leftI]
+                        
+                        origin.x = leftNeighbor.maxX
+                        origin.y = min(lastBounds.maxY, leftNeighbor.minY)
+                    }
+                }
+                
+                rect = CGRect(origin: origin, size: size)
+                currColCount += 1
+                
+            } else {
+                rect = CGRect(origin: .zero, size: size)
+                currColCount += 1
+            }
+            
+            bounds.append(rect)
+            newPrefs[item] = rect
         }
+        self.preferences = newPrefs
     }
 }
