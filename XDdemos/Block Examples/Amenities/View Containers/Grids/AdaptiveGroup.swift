@@ -1,5 +1,5 @@
 //
-//  AdaptiveGrid.swift
+//  AdaptiveGroup.swift
 //  XDdemos
 //
 //  Created by Dillon on 5/25/22.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct AdaptiveGrid<T, Content>: View where T: Hashable, Content: View {
+struct AdaptiveGroup<T, Content>: View where T: Hashable, Content: View {
     let data: [T]
     let direction: FlexDirection
     let size: AdaptiveItemSize
-    let gridContent: (T) -> Content
+    let groupContent: (T) -> Content
     
     init(
         _ data: [T],
@@ -22,21 +22,24 @@ struct AdaptiveGrid<T, Content>: View where T: Hashable, Content: View {
         self.data = data
         self.direction = flexDirection
         self.size = itemSize
-        self.gridContent = content
+        self.groupContent = content
     }
     
     var body: some View {
-        let gridItems = [GridItem(
-            .adaptive(minimum: size.min, maximum: size.max),
-            alignment: .leading
-        )]
+        let gridItems = [
+            GridItem(
+                .adaptive(minimum: size.min, maximum: size.max),
+                alignment: .leading
+            )
+        ]
         
         switch direction {
             case .row, .rowReverse:
                 // alignment of entire grid within parent view
                 LazyHGrid(rows: gridItems, alignment: .center) {
                     AdaptiveContent(data, direction) { item in
-                        gridContent(item)
+                        groupContent(item)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                     }
                 }
                 
@@ -44,7 +47,8 @@ struct AdaptiveGrid<T, Content>: View where T: Hashable, Content: View {
                 // alignment of entire grid within parent view
                 LazyVGrid(columns: gridItems, alignment: .leading) {
                     AdaptiveContent(data, direction) { item in
-                        gridContent(item)
+                        groupContent(item)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                     }
                 }
         }
@@ -79,7 +83,7 @@ struct AdaptiveGrid_Previews: PreviewProvider {
     static var previews: some View {
         let amenities: [Amenity] = Amenity.mock()
         
-        AdaptiveGrid(
+        AdaptiveGroup(
             amenities,
             flexDirection: .column,
             itemSize: .defaultColumn

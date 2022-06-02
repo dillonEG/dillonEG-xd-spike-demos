@@ -17,7 +17,7 @@ struct AmenitiesAdaptiveGrid: View {
             Text("Amenities")
                 .amenityTextLabel(.title)
             
-            AdaptiveGrid(amenities, flexDirection: .column, itemSize: .minimum(186)) { amenity in
+            AdaptiveGroup(amenities, flexDirection: .column, itemSize: .minimum(180)) { amenity in
                 AmenityItem(amenity)
                     .background(show ? .orange : .clear)
             }
